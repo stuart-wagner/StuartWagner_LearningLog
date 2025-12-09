@@ -9,7 +9,7 @@ def index(request):
 
 @login_required
 def topics(request):
-    topics = Topic.objects.all()
+    topics = Topic.objects.filter(owner=request.user).order_by('date_added')
     context = {'T': topics}     #key represents the variable name in the template, the value is the variable name in the view
     return render(request, 'MainApp/topics.html', context)
 
